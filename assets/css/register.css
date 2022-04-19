@@ -56,6 +56,7 @@ html{
 	height: 45px;
 	line-height: 27px;
 	font-size: 20px;
+	outline: none;
 }
 
 #inputContainer label{

@@ -53,12 +53,7 @@
 
 	<div id="background">
 		<!-- Image and text -->
-	<nav class="navbar navbar-dark bg-dark">
-	  <a class="navbar-brand" href="https://www.spotify.com/in-en/" target="new">
-	    <img src="assets/images/spotify.png" width="30" height="30" class="d-inline-block align-top" alt="">
-	    Checkout the Original Spotify!
-	  </a>
-	</nav>
+	
 
 		<div id="loginContainer">
 

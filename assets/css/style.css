@@ -535,7 +535,7 @@ select.item.playlist {
 .plansContainer {
 	margin: 50px auto;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
 }
 
 .plan {
@@ -566,4 +566,74 @@ select.item.playlist {
 .planCost {
 	font-size: 16px;
     letter-spacing: 0.8px;
+}
+
+.currentPlan {
+	margin-top: 50px;
+    font-size: 25px;
+    letter-spacing: 0.8px;
+    color: #2ebd59;
+}
+
+
+.infoContainer {
+	font-size: 18px;
+	letter-spacing: 1px;
+}
+
+.infoContainer span{
+	display: inline-block;
+	margin: 4px;
+}
+
+
+
+
+.filterListSelect{
+	background-color: #383838;
+    padding: 7px;
+    border: 0.5px solid white;
+    border-radius: 6px;
+    font-size: 16px;
+    letter-spacing: 0.5px;
+    margin: 12px;
+    outline: none;
+}
+
+.paymentInfo{
+	margin: 100px auto;
+    text-align: left;
+    background-color: #252525;
+    width: 50%;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+.paymentButtonContainer{
+	text-align: center;
+}
+
+.paymentButton{
+    background-color: #2ebd59;
+    padding: 10px;
+    font-size: 18px;
+    letter-spacing: 1px;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+.paymentButton:hover{
+	cursor: pointer;
+}
+
+
+span.browseLink:hover{
+	cursor: pointer;
+
+	color: white;
+}
+
+.artistLink:hover{
+	cursor: pointer;
 }

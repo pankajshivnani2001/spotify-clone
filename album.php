@@ -33,44 +33,44 @@
 	<div class="tracklist">
 		<ul>
 			<?php 
+ 
+					$songIdArray = $album->getSongIdArray();
+					$listCount = 1;
+					foreach($songIdArray as $songId){
+						$albumSong = new Song($con, $songId);
+						$albumArtist = $albumSong->getArtist();
+						$songTitle = $albumSong->getTitle();
+						$artistName = $albumArtist->getName();
+						$songDuration = $albumSong->getDuration();
 
-				$songIdArray = $album->getSongIdArray();
-				$listCount = 1;
-				foreach($songIdArray as $songId){
-					$albumSong = new Song($con, $songId);
-					$albumArtist = $albumSong->getArtist();
-					$songTitle = $albumSong->getTitle();
-					$artistName = $albumArtist->getName();
-					$songDuration = $albumSong->getDuration();
+						echo "
+							<li class='tracklistRow'>
 
-					echo "
-						<li class='tracklistRow'>
+								<div class='trackCount'>
+									<img class='play' src='assets/images/icons/play-white.png' onclick='setTrack(\"" . $songId . "\", tempPlaylist, true)'>
+									<span class='trackNumber'> $listCount </span>
+								</div>
 
-							<div class='trackCount'>
-								<img class='play' src='assets/images/icons/play-white.png' onclick='setTrack(\"" . $songId . "\", tempPlaylist, true)'>
-								<span class='trackNumber'> $listCount </span>
-							</div>
-
-							<div class='trackInfo'>
-								<span class='trackName'> $songTitle </span>
-								<span class='artistName'> $artistName </span>
-							</div>
+								<div class='trackInfo'>
+									<span class='trackName'> $songTitle </span>
+									<span class='artistName'> $artistName </span>
+								</div>
 
 
-							<div class='trackOptions'>
-								<input type='hidden' class='songId' value=". $songId ."> 
-								<img class='options' src='assets/images/icons/more.png' onclick='showOptionsMenu(this)'>
-							</div>
+								<div class='trackOptions'>
+									<input type='hidden' class='songId' value=". $songId ."> 
+									<img class='options' src='assets/images/icons/more.png' onclick='showOptionsMenu(this)'>
+								</div>
 
-							<div class='trackDuration'>
-								<span class='duration'> $songDuration </span>
-							</div>
+								<div class='trackDuration'>
+									<span class='duration'> $songDuration </span>
+								</div>
 
-						</li>
-					";
+							</li>
+						";
 
-					$listCount = $listCount + 1;
-				}
+						$listCount = $listCount + 1;
+					}
 			?>
 
 
@@ -103,8 +103,6 @@
 		?>
 		
 	</select>
-	<div class="item">Item1</div>
-	<div class="item">Item2</div>
 </nav>
 
 

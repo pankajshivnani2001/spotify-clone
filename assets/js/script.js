@@ -32,11 +32,45 @@ $(document).on("change", "select.playlist", function() {
 	var playlistId = $(this).val(); //the value attribute for the select option that was chosen.
 	var songId = $(this).prev(".songId").val(); //getting the songId from the hidden input just above the <select>
 
-	$.post("http://localhost/slotify/includes/handlers/ajax/addSongInPlaylist.php", {playlistId : playlistId, songId : songId})
-	.done(function() {
+	$.post("http://localhost/slotify/includes/handlers/ajax/addSongInPlaylist.php", {playlistId : playlistId, songId : songId, username : userLoggedIn})
+	.done(function(response) {
 		hideOptionsMenu();
 		select.val("");
+
+		if(response != "")
+		{
+			alert(response);
+		}
 	});
+
+});
+
+$(document).on("change", "select.filterListSelect", function() {
+		var select = $(this);
+
+		var selectedOption = select.val();
+
+		if(selectedOption == "Most Played")
+		{
+			openPage("browse.php?sortBy=1");
+		}
+
+		else if(selectedOption == "Least Played")
+		{
+			openPage("browse.php?sortBy=2");
+		}
+
+		else if(selectedOption == "Longest Duration")
+		{
+			openPage("browse.php?sortBy=3");
+		}
+
+		else if(selectedOption == "Shortest Duration")
+		{
+			openPage("browse.php?sortBy=4");
+		}
+
+		
 
 });
 
@@ -59,6 +93,11 @@ function openPage(url) {
 	$("#mainContent").load(encoded_url);
 	$("body").scrollTop(0);//scroll to top whenever we load a page
 	history.pushState(null, null, url); //to make the url update in the browser url 
+}
+
+function openPaymentPage(url) {
+
+	window.open(url, "_blank");
 }
 
 
@@ -152,9 +191,13 @@ function createPlaylist() {
 
 	if(playlistName != null) {
 		$.post("includes/handlers/ajax/createPlaylist.php", { playlistName : playlistName, username : userLoggedIn })
-		.done(function() {	
+		.done(function(response) {	
 
-			console.log("Done!");
+			if(response == "False")
+			{
+				alert("Your Current Plan Does Not Support Any More Playlists. Please Upgrade...")
+
+			}
 			openPage("yourMusic.php")
 
 		});
@@ -233,3 +276,14 @@ function updatePassword() {
 		$("[name = 'confirmPw']").val("");
 	})
 }
+
+function upgradePlan(planType) {
+	$.post("includes/handlers/ajax/upgradePlan.php", {planType : planType, username : userLoggedIn})
+	.done(function(response) {
+		//openPage('upgradePlan.php');
+		$(".currentPlan").text(response);
+	})
+}
+
+
+

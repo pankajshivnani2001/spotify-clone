@@ -10,20 +10,25 @@
 	}
 
 	$artist = new Artist($con, $_GET['id']);
+	$profilePic = 'assets/images/ArtistProfilePics/' . $artist->getProfilePic();
 	
 ?>
 
+
+
 <div class="entityInfo borderBottom">
+	<div class="leftSection">
+			<img src="<?php echo $profilePic ?>">
+	</div>
 	<div class="centerSection">
-		<div class="artistInfo">
 			<h1 class="artistName">
 				<?php echo $artist->getName(); ?>
 			</h1>
-
 			<div class="headerButtons">
 				<button class="button green" onclick="playFirstSong()">Play</button>
 			</div>
 		</div>
+
 	</div>
 </div>
 
@@ -141,6 +146,4 @@
 		?>
 		
 	</select>
-	<div class="item">Item1</div>
-	<div class="item">Item2</div>
 </nav>

@@ -78,23 +78,78 @@
 	}
 
 
-	//to move to the next song in the playlist when one song ends
-	function nextSong() {
-		if(repeat) {
+	function temp(event) {
+		var ad = document.getElementById("ad");
+		$(".playerControls").css("visibility", "visible");
+		console.log("ended");
+		ad.currentTime = 0;
+
+		if(repeat) 
+		{
 			audioElement.setTime(0);
 			playSong();
 			return;
 		}
 
-		if(currentSongIndex == currentPlaylist.length - 1){
+		if(currentSongIndex == currentPlaylist.length - 1)
+		{
 			currentSongIndex = 0;
 		}
-		else{
+		else
+		{
 			currentSongIndex += 1;
 		}
 
 		var trackToPlay = shuffle ? shufflePlaylist[currentSongIndex] : currentPlaylist[currentSongIndex];
 		setTrack(trackToPlay, currentPlaylist, true);
+
+		ad.removeEventListener("ended", temp);
+		
+				
+	}
+
+	//to move to the next song in the playlist when one song ends
+	function nextSong() 
+	{
+		//TODO: ajax call to check if any userplan exists
+		$.post("includes/handlers/ajax/checkUserPlan.php", { username : userLoggedIn }, function(response){
+
+			console.log(response);
+			if(response == "False")
+			{
+				pauseSong();
+
+				$(".playerControls").css("visibility", "hidden");
+
+				var ad = document.getElementById("ad");
+				ad.play();
+
+				ad.addEventListener("ended", temp);
+				
+			}
+
+			else
+			{
+					if(repeat) 
+					{
+						audioElement.setTime(0);
+						playSong();
+						return;
+					}
+
+					if(currentSongIndex == currentPlaylist.length - 1)
+					{
+						currentSongIndex = 0;
+					}
+					else
+					{
+						currentSongIndex += 1;
+					}
+
+					var trackToPlay = shuffle ? shufflePlaylist[currentSongIndex] : currentPlaylist[currentSongIndex];
+					setTrack(trackToPlay, currentPlaylist, true);
+			}
+		});
 	}
 
 	function invertRepeat(){
@@ -335,4 +390,8 @@
 		</div>
 
 	</div>
+</div>
+
+<div class="adAudio">
+	<audio hidden id="ad"> <source src="assets/music/AD.mp3" type="audio/mpeg"></audio>
 </div>

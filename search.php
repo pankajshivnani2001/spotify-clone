@@ -34,7 +34,7 @@
 	$(function(){
 		
 
-		$(".searchInput").keyup(function(){	//when key is up, that is, the user is finished typing, get the clear the timer, get the input value and load the search page with the term after a wait of 2000milli secs
+		$(".searchInput").keyup(function(){	//when key is up, that is, the user is finished typing, clear the timer, get the input value and load the search page with the term after a wait of 2000milli secs
 			clearTimeout(timer);
 
 			timer = setTimeout(function() {
@@ -208,6 +208,4 @@
 		?>
 		
 	</select>
-	<div class="item">Item1</div>
-	<div class="item">Item2</div>
 </nav>

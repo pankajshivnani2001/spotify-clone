@@ -29,5 +29,17 @@
 
 					return $songIdArray;
 				}
+
+				public function getNumberOfAlbums(){
+					$query = mysqli_query($this->con, "SELECT count(*) AS total FROM albums WHERE artist = '$this->id'");
+					$row = mysqli_fetch_array($query);
+					return $row['total'];
+				}
+
+				public function getProfilePic(){
+					$query = mysqli_query($this->con, "SELECT profilePicPath FROM artists WHERE id = '$this->id'");
+					$row = mysqli_fetch_array($query);
+					return $row['profilePicPath'];
+				}
 		}
 ?>
